@@ -1,0 +1,32 @@
+<h3>Hello {{request.user}}</h3>
+<a href="{% url 'logout' %}" >Logout</a>
+<br><hr><br>
+<form method="post" action="">
+    {% csrf_token %}
+   
+    Title:
+    <br>
+    {{ form.title }}
+    <br>
+    Amount:
+    <br>
+    {{ form.ammount }}
+    <br><br>
+<input type="submit" class="btn btn-success" name="Add Review">
+</form>
+
+<table>
+{% for pay in payments reversed %}
+<tr>
+<td>{{pay.title}}</td> 
+<td>{{pay.ammount}} lei</td>
+<td> on {{pay.create}}</td>
+<td><a  href="{% url 'update' pay.id %}">Update</a></td>
+<td><a  href="{% url 'delete' pay.id %}">Delete</a></td>
+</tr>
+<br>
+<br>
+{% endfor %}
+</table>
+
+Total: {{total}}
